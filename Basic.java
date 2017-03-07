@@ -1,5 +1,6 @@
+import java.io.Serializable;
 import java.util.ArrayList;
-class Basic implements Strategy {
+class Basic implements Strategy, Serializable{
 	public int discardCard(Player p)
 	{
 		//discard card that requires the most stocks

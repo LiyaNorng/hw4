@@ -1,6 +1,8 @@
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.AfterClass;
 import org.junit.Test;
 
@@ -183,7 +185,7 @@ public class Driver {
 		assertFalse(player.getHand().getCard(7).isPlayable());		
 	}
 	@AfterClass
-	public static void runOnce(){
+	public static void runOnce() throws IOException{
 		System.out.println("\n\n\nBattle\n\n\n");
 		GameFactory cw=new CastleWarsFactory();
 		Duel game = cw.createGame();

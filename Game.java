@@ -65,39 +65,76 @@ class Game extends Duel{
 			
 	    }
 	    else{
-	    	System.out.println("Do you want to restore a game?");
+	    	System.out.println("Do you want to load up your mid game check point?");
 			userInput = scanner.nextLine();
 			if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y")){
-				automated=false;
-				Player p1=new PlayerName("Smith", 0, 1);
-				Player p2=new PlayerName("Bob", 0, 1);
-				p1.setLoad("new");
-				p2.setLoad("new");
-				listOfPlayer.add(p1);
-				listOfPlayer.add(p2);
-				Scanner scanner = new Scanner(new File("out.txt"));
-				int builders=scanner.nextInt();
-				int bricks=scanner.nextInt();
-				int soldiers=scanner.nextInt();
-				int weapons=scanner.nextInt();
-				int magic=scanner.nextInt();
-				int crystals=scanner.nextInt();
-				int castle=scanner.nextInt();
-				int fence=scanner.nextInt();
-				
-				p1.loadPlayer(builders, bricks, soldiers, weapons, magic, crystals, castle, fence);
-				
-			 	builders=scanner.nextInt();
-				bricks=scanner.nextInt();
-				soldiers=scanner.nextInt();
-				weapons=scanner.nextInt();
-				magic=scanner.nextInt();
-				crystals=scanner.nextInt();
-				castle=scanner.nextInt();
-				fence=scanner.nextInt();
-				
-				p2.loadPlayer(builders, bricks, soldiers, weapons, magic, crystals, castle, fence);
-				
+        		for (int i= 0; i < 2; i++){
+            		System.out.println("Please give me a name for a player and a computer: ");
+                	userInput = scanner.nextLine();
+                	player = new LoadCastleGame().loadGame(userInput);
+                	if (player.getUserName().equals("") ){
+                		System.out.println("Sorry, can't find the userName on the data.");
+                	    System.exit(1);
+                	}
+                	else{
+                		if (i == 0){
+                			p1 = player;
+                		}
+                		else{
+                			p2 = player;
+                		}
+                		listOfPlayer.add(player);
+                	}	
+        		}
+			}
+			else {
+				System.out.println("Do you want to load up your end game check point?");
+				userInput = scanner.nextLine();
+				if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y")){
+					for (int i = 0; i < 2; i++){
+	            		System.out.println("Please give me a name for a player and a computer: ");
+	                	userInput = scanner.nextLine();
+	                	player = new LoadCastleGame().loadGame(userInput);
+	                	if (player.getUserName().equals("") ){
+	                		System.out.println("Sorry, can't find the userName on the data.");
+	                	    System.exit(1);
+	                	}
+	                	else{
+	                		player.resetPlayer();
+	                		player.addCardToHand();
+	                    	listOfPlayer.add(player);
+	                	}	
+	            	}
+					
+					
+					/**
+					Scanner scanner = new Scanner(new File("out.txt"));
+					int builders=scanner.nextInt();
+					int bricks=scanner.nextInt();
+					int soldiers=scanner.nextInt();
+					int weapons=scanner.nextInt();
+					int magic=scanner.nextInt();
+					int crystals=scanner.nextInt();
+					int castle=scanner.nextInt();
+					int fence=scanner.nextInt();
+					
+					p1.loadPlayer(builders, bricks, soldiers, weapons, magic, crystals, castle, fence);
+					
+				 	builders=scanner.nextInt();
+					bricks=scanner.nextInt();
+					soldiers=scanner.nextInt();
+					weapons=scanner.nextInt();
+					magic=scanner.nextInt();
+					crystals=scanner.nextInt();
+					castle=scanner.nextInt();
+					fence=scanner.nextInt();
+					
+					p2.loadPlayer(builders, bricks, soldiers, weapons, magic, crystals, castle, fence);
+					**/
+				}
+				else{
+					System.exit(1);
+				}
 			}
 	    }
 		for ( int i = 0; i < listOfPlayer.size(); i++){
@@ -252,7 +289,10 @@ class Game extends Duel{
 				else{
 					p2.setPoint(p2.getPoint() + 1);
 				}
-				new SaveCastleWarsGame().saveGame(listOfPlayer);
+				
+				for (int i = 0; i < listOfPlayer.size(); i++){
+					new SaveCastleGame().saveGame(listOfPlayer.get(i));
+				}
 				listOfPlayer.clear();
 			}
 			if (campaign){

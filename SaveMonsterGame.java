@@ -12,7 +12,8 @@ public class SaveMonsterGame {
 			FileOutputStream fos = new FileOutputStream(player.getUserName() + ".ser");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(player);
-			oos.close();			
+			oos.close();
+			System.out.println("Game Saved!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

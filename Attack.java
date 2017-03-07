@@ -1,5 +1,6 @@
+import java.io.Serializable;
 import java.util.*;
-class Attack implements Strategy{
+class Attack implements Strategy, Serializable{
 	public Card discardCard(Player p)
 	{/**
 		//find lowest resource

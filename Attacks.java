@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Attacks extends Card{
+public class Attacks extends Card implements Serializable{
 
 	public Attacks()
 	{

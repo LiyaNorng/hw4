@@ -47,7 +47,14 @@ abstract class Player extends Observable implements PlayerProperty, Serializable
 		this.castle=castle;
 		this.fence=fence;
 	}
-	
+	public void addCardToHand(){
+		for (int i=0;i<hand.size();i++)
+		{
+			addObserver(hand.getCard(i));
+			setChanged();
+			notifyObservers();
+		}
+	}
 	public String getDescription(){
 		return description;
 	}

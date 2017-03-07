@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.*;
 import java.util.Random;
-class Hand {
+class Hand implements Serializable{
 	private ArrayList<Card> hand=new ArrayList<Card>(); //array of cards
 	private List<String> cardNames=Arrays.asList("Fence","Banshee","Wall","Pixies","Dragon","Platoon","Recruit", "Attack", "Babylon", "Knight", "Wain","School","Conjure Crystals","Rider","Fort");
 	

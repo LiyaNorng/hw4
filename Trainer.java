@@ -24,7 +24,7 @@ import java.util.Map;
  * @param computer to keep track whether this player is computer or user
  */
 
-public class Trainer implements PlayerPropertys{
+public class Trainer implements PlayerPropertys, Serializable{
     
     protected String userName;
     protected int health;

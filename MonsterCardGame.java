@@ -47,21 +47,46 @@ public class MonsterCardGame extends Duel{
 
         }
         else{
-        	for (int i = 0; i < 2; i++){
-        		System.out.println("Please give me a name for a player and a computer: ");
-            	userInput = scanner.nextLine();
-            	player = new LoadMonsterCardGame().loadGame(userInput);
-            	if (player.getUserName().equals("") ){
-            		System.out.println("Sorry, can't find the userName on the data.");
-            	    System.exit(1);
+            System.out.println("Do you want to resume your last saved?");
+            userInput = scanner.nextLine();
+            if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y")){
+            	for (int i = 0; i < 2; i++){
+            		System.out.println("Please give me a name for a player and a computer: ");
+                	userInput = scanner.nextLine();
+                	player = new LoadMonsterGame().loadGame(userInput);
+                	if (player.getUserName().equals("") ){
+                		System.out.println("Sorry, can't find the userName on the data.");
+                	    System.exit(1);
+                	}
+                	else{
+                		if (player.isCardsOnHandEmpty()){
+                    		this.addMonsterToHand();
+                		}
+                		player.setLoad("load");
+                    	twoPlayer.put(player.getUserName(), player);
+                	}	
             	}
-            	else{
-            		this.addMonsterToHand();
-            		player.setLoad("load");
-                	twoPlayer.put(player.getUserName(), player);
-            	}	
-        	}
-        }  
+            }
+            else {
+            	for (int i = 0; i < 2; i++){
+            		System.out.println("Please give me a name for a player and a computer: ");
+                	userInput = scanner.nextLine();
+                	player = new LoadMonsterGame().loadGame(userInput);
+                	player.health = 50;
+                	if (player.getUserName().equals("") ){
+                		System.out.println("Sorry, can't find the userName on the data.");
+                	    System.exit(1);
+                	}
+                	else{
+                		if (player.isCardsOnHandEmpty()){
+                    		this.addMonsterToHand();
+                		}
+                		player.setLoad("load");
+                    	twoPlayer.put(player.getUserName(), player);
+                	}	
+            	}
+            }  
+        }      	
     }
     public void initializePlayer(String userName, String gender, String turn, String computer)
     {
@@ -174,7 +199,10 @@ public class MonsterCardGame extends Duel{
             {
                 break;
             }
-            if (userInput.equals("fight"))
+            if (userInput.equals("save")){
+            	this.quitGame();
+            }
+            else if (userInput.equals("fight"))
             {
                 if (player.isThereAnyMonsterOnField())
                 {
@@ -211,8 +239,12 @@ public class MonsterCardGame extends Duel{
     }
     
     public void quitGame(){
-    	new SaveMonsterCardGame().saveGame(twoPlayer, player.getUserName());
-	    System.exit(1);
+    	//new SaveMonsterCardGame().saveGame(twoPlayer, player.getUserName());
+    	for (String in: twoPlayer.keySet())
+        {
+    		 new SaveMonsterGame().saveGame(twoPlayer.get(in));
+        } 
+    	System.exit(1);
     }
     
     

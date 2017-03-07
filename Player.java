@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.Random;
 
-abstract class Player extends Observable implements PlayerProperty{
+abstract class Player extends Observable implements PlayerProperty, Serializable{
 	protected int builders;
 	protected int bricks;
 	protected int soldiers;

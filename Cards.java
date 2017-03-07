@@ -18,7 +18,7 @@ import java.io.Serializable;
  * @param level is to keep track the level the monster is
  * @param levelCard is to keep track if the card is a upgradable
  */
-public class Cards{
+public class Cards implements Serializable{
 
     private String name;
     private int attackPiont;

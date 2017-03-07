@@ -3,7 +3,7 @@
 
 import java.io.Serializable;
 import java.util.*;
-public abstract class Card implements Observer{
+public abstract class Card implements Observer, Serializable{
 	String name; //card name	
 	String resource; //what resource it needs to be able to use the card
 	int amount;  //how much of that resource it needs

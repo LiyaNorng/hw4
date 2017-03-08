@@ -9,7 +9,6 @@ public class SaveCastleGame {
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(player);
 			oos.close();	
-			System.out.println("Game Saved!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

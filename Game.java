@@ -14,14 +14,21 @@ class Game extends Duel{
 		System.out.println("Do you want start a new game?");
 		userInput = scanner.nextLine();
 		if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y")){
-			Player p1=new PlayerName("Smith", 0, 1);
-			Player p2=new PlayerName("Bob", 0, 1);
-			p1.setLoad("new");
-			p2.setLoad("new");
-			listOfPlayer.add(p1);
-			listOfPlayer.add(p2);
-			
-		
+			for (int i = 0; i < 2; i++){
+				System.out.println("Please give me a userName.");
+				userInput = scanner.nextLine();
+				if (i == 0){
+					Player p1=new PlayerName(userInput, 0, 1);
+					p1.setLoad("new");
+					listOfPlayer.add(p1);
+				}
+				else{
+					Player p2=new PlayerName(userInput, 0, 1);
+					p2.setLoad("new");
+					listOfPlayer.add(p2);
+				}
+			}
+
 			System.out.println("Would you like to select a character race?");
 			userInput=scanner.nextLine();
 			if(userInput.equalsIgnoreCase("yes")||userInput.equalsIgnoreCase("y")){
@@ -293,6 +300,7 @@ class Game extends Duel{
 				for (int i = 0; i < listOfPlayer.size(); i++){
 					new SaveCastleGame().saveGame(listOfPlayer.get(i));
 				}
+				System.out.println("Game Saved!");
 				listOfPlayer.clear();
 			}
 			if (campaign){

@@ -62,17 +62,11 @@ public class MonsterCardGame extends Duel{
             		System.out.println("Please give me a name for a player and a computer: ");
                 	userInput = scanner.nextLine();
                 	player = new LoadMonsterGame().loadGame(userInput);
-                	if (player.getUserName().equals("") ){
-                		System.out.println("Sorry, can't find the userName on the data.");
-                	    System.exit(1);
-                	}
-                	else{
-                		if (player.isCardsOnHandEmpty()){
-                    		this.addMonsterToHand();
-                		}
-                		player.setLoad("load");
-                    	twoPlayer.put(player.getUserName(), player);
-                	}	
+                	if (player.isCardsOnHandEmpty()){
+                		this.addMonsterToHand();
+            		}
+            		player.setLoad("load");
+                	twoPlayer.put(player.getUserName(), player);
             	}
             }
             else {
@@ -81,17 +75,11 @@ public class MonsterCardGame extends Duel{
                 	userInput = scanner.nextLine();
                 	player = new LoadMonsterGame().loadGame(userInput);
                 	player.health = 50;
-                	if (player.getUserName().equals("") ){
-                		System.out.println("Sorry, can't find the userName on the data.");
-                	    System.exit(1);
-                	}
-                	else{
-                		if (player.isCardsOnHandEmpty()){
-                    		this.addMonsterToHand();
-                		}
-                		player.setLoad("load");
-                    	twoPlayer.put(player.getUserName(), player);
-                	}	
+                	if (player.isCardsOnHandEmpty()){
+                		this.addMonsterToHand();
+            		}
+            		player.setLoad("load");
+                	twoPlayer.put(player.getUserName(), player);
             	}
             }  
         }      	

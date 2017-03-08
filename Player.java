@@ -18,6 +18,7 @@ abstract class Player extends Observable implements PlayerProperty, Serializable
 	protected int level;
 	protected String description;
 	protected Strategy strategy; //attack or basic
+	protected boolean automated;
 	
 	public Player(){
 		builders=2;
@@ -73,6 +74,12 @@ abstract class Player extends Observable implements PlayerProperty, Serializable
 		crystals=5;
 		castle=30;
 		fence=10;
+	}
+	public void setAutomated(boolean automated){
+		this.automated = automated;
+	}
+	public boolean getAutomated(){
+		return automated;
 	}
 	public String getLoad(){
 		return load;

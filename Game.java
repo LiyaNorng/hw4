@@ -21,7 +21,7 @@ class Game extends Duel{
 					Player p1=new PlayerName(userInput, 0, 1);
 					p1.setLoad("new");
 					listOfPlayer.add(p1);
-				}
+					}
 				else{
 					Player p2=new PlayerName(userInput, 0, 1);
 					p2.setLoad("new");
@@ -69,7 +69,6 @@ class Game extends Duel{
 			userInput=scanner.nextLine();
 			if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y"))
 				automated=false;
-			
 	    }
 	    else{
 	    	System.out.println("Do you want to load up your mid game check point?");
@@ -79,19 +78,14 @@ class Game extends Duel{
             		System.out.println("Please give me a name for a player and a computer: ");
                 	userInput = scanner.nextLine();
                 	player = new LoadCastleGame().loadGame(userInput);
-                	if (player.getUserName().equals("") ){
-                		System.out.println("Sorry, can't find the userName on the data.");
-                	    System.exit(1);
-                	}
-                	else{
-                		if (i == 0){
-                			p1 = player;
-                		}
-                		else{
-                			p2 = player;
-                		}
-                		listOfPlayer.add(player);
-                	}	
+                	if (i == 0){
+            			p1 = player;
+            		}
+            		else{
+            			p2 = player;
+            			automated = p2.getAutomated();
+            		}
+            		listOfPlayer.add(player);	
         		}
 			}
 			else {
@@ -102,15 +96,12 @@ class Game extends Duel{
 	            		System.out.println("Please give me a name for a player and a computer: ");
 	                	userInput = scanner.nextLine();
 	                	player = new LoadCastleGame().loadGame(userInput);
-	                	if (player.getUserName().equals("") ){
-	                		System.out.println("Sorry, can't find the userName on the data.");
-	                	    System.exit(1);
-	                	}
-	                	else{
-	                		player.resetPlayer();
-	                		player.addCardToHand();
-	                    	listOfPlayer.add(player);
-	                	}	
+	                	player.resetPlayer();
+                		player.addCardToHand();
+                		if (i == 1){
+                			automated = p2.getAutomated();
+                		}
+                    	listOfPlayer.add(player);	
 	            	}
 					
 					
@@ -179,6 +170,15 @@ class Game extends Duel{
 			System.out.println("would you like to save and continue the game later?\n This would overwrite any other restore point.");
 			userInput = scanner.nextLine();
 			if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y")){
+				p1.setAutomated(automated);
+				for (int i = 0; i < listOfPlayer.size(); i++){
+					new SaveCastleGame().saveGame(listOfPlayer.get(i));
+				}
+				System.out.println("Game Saved!");
+				listOfPlayer.clear();
+				System.exit(1);
+				
+				/**
 				FileOutputStream out; // declare a file output object
 						PrintStream p; // declare a print stream object
 
@@ -214,6 +214,8 @@ class Game extends Duel{
 						{
 							System.err.println ("Error writing to file");
 						}
+						
+						**/
 			}
 			do{
 				System.out.println("Would you like to use or discard a card?");
@@ -296,7 +298,7 @@ class Game extends Duel{
 				else{
 					p2.setPoint(p2.getPoint() + 1);
 				}
-				
+				p1.setAutomated(automated);
 				for (int i = 0; i < listOfPlayer.size(); i++){
 					new SaveCastleGame().saveGame(listOfPlayer.get(i));
 				}

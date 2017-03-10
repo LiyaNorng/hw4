@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.Random;
 
-abstract class Player extends Observable implements PlayerProperty, Serializable{
+abstract class Player extends Observable implements PlayerProperty, Serializable, ProxyPattern{
 	protected int builders;
 	protected int bricks;
 	protected int soldiers;
@@ -198,5 +198,9 @@ abstract class Player extends Observable implements PlayerProperty, Serializable
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void permissionAccess() {
+        System.out.println("Monster game access granted for player: " + this.userName);  
+	}   
 	
 }

@@ -8,6 +8,8 @@ class Game extends Duel{
 	String userInput;
 	boolean campaign=false;
 	boolean automated=true;
+    private ProxyPattern proxy;
+    private int age;
 	int stage=1;
 	
 	public Game(Player player1,Player player2) throws IOException{
@@ -17,13 +19,18 @@ class Game extends Duel{
 			for (int i = 0; i < 2; i++){
 				System.out.println("Please give me a userName.");
 				userInput = scanner.nextLine();
+				System.out.println("Please provide your age.");
+		        this.age = Integer.valueOf(scanner.nextLine());
+		        proxy = new ProxyPlayer(userInput,this.age);
+		    	proxy.permissionAccess();
+		    	player = ((ProxyPlayer) proxy).getPlayer();
 				if (i == 0){
-					Player p1=new PlayerName(userInput, 0, 1);
+					Player p1=player;
 					p1.setLoad("new");
 					listOfPlayer.add(p1);
 					}
 				else{
-					Player p2=new PlayerName(userInput, 0, 1);
+					Player p2=player;
 					p2.setLoad("new");
 					listOfPlayer.add(p2);
 				}

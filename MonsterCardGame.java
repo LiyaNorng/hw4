@@ -32,6 +32,8 @@ public class MonsterCardGame extends Duel{
     static String userInput;
     static TrainerMove move;
     static boolean playerWin;
+    private int age;
+    private ProxyPattern proxy;
     static AttackTheOpponent attack;
     
     
@@ -44,12 +46,14 @@ public class MonsterCardGame extends Duel{
         	for (int i = 0; i < 2; i++){
 				System.out.println("Please give me a userName.");
 				userInput = scanner.nextLine();
+				System.out.println("Please provide your age.");
+		        this.age = Integer.valueOf(scanner.nextLine());
 				if (i == 0){
-		        	 initializePlayer(userInput, "male", "1", "0");
+		        	 initializePlayer(userInput,this.age, "male", "1", "0");
 		        	 player.setLoad("new");
 				}
 				else{
-		             initializePlayer(userInput, "male", "0", "1");
+		             initializePlayer(userInput,this.age, "male", "0", "1");
 		        	 player.setLoad("new");
 				}
 			}
@@ -84,9 +88,11 @@ public class MonsterCardGame extends Duel{
             }  
         }      	
     }
-    public void initializePlayer(String userName, String gender, String turn, String computer)
+    public void initializePlayer(String userName, int ages,String gender, String turn, String computer)
     {
-        player = new TotalPoints(userName, gender, turn, computer, 0, 1);
+    	proxy = new ProxyTrainer(userName, gender,turn, computer, ages);
+    	proxy.permissionAccess();
+    	player = ((ProxyTrainer) proxy).getTrainer();
         this.displayPlayer();
         
         //this.addMonsterToHandHardCode();   /// this is for unit testing

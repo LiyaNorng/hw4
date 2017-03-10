@@ -13,6 +13,7 @@ public class LoadCastleGame {
 			ois.close();	
 		} catch (FileNotFoundException exception) {
 	        System.out.println("The file " + name + ".ser" + " was not found.");
+	        System.out.println("Please create an account first to resume the game.");
 	        System.exit(1);
 		} catch (IOException e) {
 			e.printStackTrace();

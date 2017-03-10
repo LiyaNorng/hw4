@@ -24,7 +24,7 @@ import java.util.Map;
  * @param computer to keep track whether this player is computer or user
  */
 
-public class Trainer implements PlayerPropertys, Serializable{
+public class Trainer implements PlayerPropertys, Serializable, ProxyPattern{
     
     protected String userName;
     protected int health;
@@ -37,6 +37,7 @@ public class Trainer implements PlayerPropertys, Serializable{
     protected int points;
     protected String load;
     protected int level;
+
     
     public Trainer(String userName, String gender, String turn, String computer) {
         this.userName = userName;
@@ -186,5 +187,10 @@ public class Trainer implements PlayerPropertys, Serializable{
 	public void update() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void permissionAccess() {
+        System.out.println("Monster game access granted for player: " + this.userName);  
 	}   
 }

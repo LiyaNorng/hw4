@@ -11,6 +11,7 @@ class Game extends Duel{
     private ProxyPattern proxy;
     private int age;
 	int stage=1;
+	CampaignComponent playCampaign;
 	
 	public Game(Player player1,Player player2) throws IOException{
 		System.out.println("Do you want start a new game?");
@@ -71,6 +72,17 @@ class Game extends Duel{
 			userInput=scanner.nextLine();
 			if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y"))
 				campaign=true;
+			
+			if(campaign){
+				System.out.println("What difficulty would your like your campaign: Easy, Medium or Hard?");
+				userInput=scanner.nextLine();
+				if(userInput.equalsIgnoreCase("easy")){
+
+				}else if(userInput.equalsIgnoreCase("medium")){
+
+				}else if(userInput.equalsIgnoreCase("hard")){
+				}
+			}
 				
 			System.out.println("Would you like to choose your own moves?");
 			userInput=scanner.nextLine();

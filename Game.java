@@ -11,7 +11,8 @@ class Game extends Duel{
     private ProxyPattern proxy;
     private int age;
 	int stage=1;
-	CampaignComponent playCampaign;
+	String difficulty;
+
 	
 	public Game(Player player1,Player player2) throws IOException{
 		System.out.println("Do you want start a new game?");
@@ -72,15 +73,16 @@ class Game extends Duel{
 			userInput=scanner.nextLine();
 			if (userInput.equals("yes") || userInput.equals("Yes") || userInput.equals("y"))
 				campaign=true;
-			
+						
 			if(campaign){
 				System.out.println("What difficulty would your like your campaign: Easy, Medium or Hard?");
 				userInput=scanner.nextLine();
 				if(userInput.equalsIgnoreCase("easy")){
-
+					difficulty = userInput.toString();
 				}else if(userInput.equalsIgnoreCase("medium")){
-
+					difficulty = userInput.toString();
 				}else if(userInput.equalsIgnoreCase("hard")){
+					difficulty = userInput.toString();
 				}
 			}
 				
@@ -323,7 +325,27 @@ class Game extends Duel{
 				}
 				System.out.println("Game Saved!");
 				listOfPlayer.clear();
-			}
+				
+		}
+			
+			CampaignComponent campaigns = new Campaign("Campaign"); 
+			CampaignComponent easyCampaign = new Campaign("easy");
+			CampaignComponent mediumCampaign = new Campaign("medium");
+			CampaignComponent hardCampaign = new Campaign("hard");
+			
+			campaigns.add(easyCampaign);
+			campaigns.add(mediumCampaign);
+			campaigns.add(hardCampaign);
+			
+			easyCampaign.add(new CampaignItem(3,2));
+			easyCampaign.add(new CampaignItem(6,3));
+			
+			mediumCampaign.add(new CampaignItem(5,2));
+			mediumCampaign.add(new CampaignItem(10,3));
+			
+			hardCampaign.add(new CampaignItem(10,2));
+			hardCampaign.add(new CampaignItem(15,3));
+			
 			if (campaign){
 				if (winner.contains("1")){
 					if (stage==3){
@@ -336,14 +358,30 @@ class Game extends Duel{
 						System.out.println("Congratulations you passed stage 1");
 						System.out.println("======================================\n\n\n");
 						stage+=1;
-						playMediumDifficulty();
+						p1.resetPlayer();
+						p2.resetPlayer();
+						if(difficulty.equalsIgnoreCase("easy"))
+							p2.buildFence(easyCampaign.getComponent(0).getFence());
+						else if(difficulty.equalsIgnoreCase("medium"))
+							p2.buildFence(mediumCampaign.getComponent(0).getFence());
+						else if(difficulty.equalsIgnoreCase("hard"))
+							p2.buildFence(hardCampaign.getComponent(0).getFence());
+							
 					}
 					else if(stage==2){
 						System.out.println("\n\n\n======================================");
-						System.out.println("Congratulations you passed stage 1");
+						System.out.println("Congratulations you passed stage 2");
 						System.out.println("======================================\n\n\n");
 						stage+=1;
-						playHardDifficulty();}
+						p1.resetPlayer();
+						p2.resetPlayer();
+						if(difficulty.equalsIgnoreCase("easy"))
+							p2.buildFence(easyCampaign.getComponent(1).getFence());
+						else if(difficulty.equalsIgnoreCase("medium"))
+							p2.buildFence(mediumCampaign.getComponent(1).getFence());
+						else if(difficulty.equalsIgnoreCase("hard"))
+							p2.buildFence(hardCampaign.getComponent(1).getFence());
+						}
 				}
 				else{ System.out.println("You lost the campaign challenge in stage "+stage);
 					System.exit(0);}
@@ -351,18 +389,7 @@ class Game extends Duel{
 		}
 		
 	}
-	public void playMediumDifficulty(){
-		p1.resetPlayer();
-		p2.resetPlayer();
-		p2.buildFence(10);
-		super.play();
-	}
-	public void playHardDifficulty(){
-		p1.resetPlayer();
-		p2.resetPlayer();
-		p2.buildFence(15);
-		super.play();
-	}
+
 	//bricks are increased depending on how many builders you have
 	//weapons are increased depending on how many soldiers you have
 	//crystals are increased depending on how much magic you have
